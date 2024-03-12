@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: provider
+  datasource:
+#    url: jdbc:mysql://host.docker.internal:3306/${think.application.name}_${spring.application.name}?useUnicode=true&characterEncoding=utf8
+#    username: root
+#    password:
+    druid:
+      filters: slf4j
+      maxActive: 20
+      initialSize: 1
+      maxWait: 60000
+      minIdle: 1
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxOpenPreparedStatements: 20
+      asyncInit: true
+      filter:
+        slf4j:
+          enabled: true
+          connection-log-enabled: false
+          statement-log-enabled: true
+          statement-executable-sql-log-enable: true
+          statement-create-after-log-enabled: false
+          statement-close-after-log-enabled: false
+          result-set-log-enabled: true

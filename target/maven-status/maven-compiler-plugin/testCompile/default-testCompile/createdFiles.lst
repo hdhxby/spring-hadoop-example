@@ -1,0 +1,4 @@
+io\github\hdhxby\example\jdbc\repository\MybatisTest.class
+io\github\hdhxby\example\data\JdbcRepositoryApplication.class
+io\github\hdhxby\example\data\jdbc\repository\UserRepositoryTest.class
+io\github\hdhxby\example\data\commons\entity\UserMapperTest.class

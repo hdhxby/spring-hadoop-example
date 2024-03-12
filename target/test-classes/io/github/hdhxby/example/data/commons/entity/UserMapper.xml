@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.github.hdhxby.example.data.commons.entity.UserMapper">
+    <cache/>
+<!--    <insert id="insert" parameterType="io.github.hdhxby.example.data.commons.entity.Hello">-->
+<!--        insert into hello(id,name) values (#{id}, #{name})-->
+<!--    </insert>-->
+<!--    <select id="findById" resultType="io.github.hdhxby.example.data.commons.entity.Hello" parameterType="long">-->
+<!--        select * from hello where id = #{id}-->
+<!--    </select>-->
+<!--    <select id="count" resultType="long">-->
+<!--        select count(id) from hello-->
+<!--    </select>-->
+<!--    <select id="findAll" resultType="io.github.hdhxby.example.data.commons.entity.Hello">-->
+<!--        select * from hello where id = #{id}-->
+<!--    </select>-->
+<!--    <select id="findAllSorted" resultType="io.github.hdhxby.example.data.commons.entity.Hello">-->
+<!--        select * from hello &lt;!&ndash;oerder by #{sort.orders}&ndash;&gt;-->
+<!--    </select>-->
+<!--    <select id="findAllPaged" resultType="io.github.hdhxby.example.data.commons.entity.Hello">-->
+<!--        select * from hello &lt;!&ndash; where limit #{pageable.page} #{pageable.size}&ndash;&gt;-->
+<!--    </select>-->
+    <sql id="criteria">
+        <if test="criteria != null">
+            <where>
+                <if test="criteria.age != null">
+                    <if test="criteria.age.equals != null">
+                        and age = #{criteria.age.equals}
+                    </if>
+                    <if test="criteria.age.notEquals != null">
+                        and age != #{criteria.age.notEquals}
+                    </if>
+                    <if test="criteria.age.greaterThan != null">
+                        and age &gt; #{criteria.age.notEquals}
+                    </if>
+                    <if test="criteria.age.lessThan != null">
+                        and age &lt; #{criteria.age.notEquals}
+                    </if>
+                    <if test="criteria.age.greaterThanOrEqual != null">
+                        and age &gt;= #{criteria.age.notEquals}
+                    </if>
+                    <if test="criteria.age.lessThanOrEqual != null">
+                        and age &lt;= #{criteria.age.notEquals}
+                    </if>
+                    <if test="criteria.age.specified != null">
+                        <choose>
+                            <when test="criteria.age.specified">
+                                and criteria.age.specified
+                            </when>
+                            <when test="!criteria.age.specified">
+                                and criteria.age.specified
+                            </when>
+                        </choose>
+                    </if>
+                    <if test="criteria.age['in'] != null">
+                        and age in
+                        <foreach collection="criteria.age['in']" item="item" index="index" open="(" close=")" separator=",">
+                            #{item}
+                        </foreach>
+                    </if>
+                    <if test="criteria.age.notIn != null">
+                        and age in
+                        <foreach collection="criteria.age.notIn" item="item" index="index" open="(" close=")" separator=",">
+                            #{item}
+                        </foreach>
+                    </if>
+                </if>
+            </where>
+            <if test="criteria.page != null and criteria.size != null">
+                limit #{criteria.page}, #{criteria.size}
+            </if>
+        </if>
+    </sql>
+    <select id="selectList" resultType="io.github.hdhxby.example.data.commons.entity.User">
+        select * from user
+        <include refid="criteria"/>
+    </select>
+</mapper>
